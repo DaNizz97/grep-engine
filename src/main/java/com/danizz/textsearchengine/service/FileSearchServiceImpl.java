@@ -42,14 +42,16 @@ public class FileSearchServiceImpl implements FileSearchService {
                 return parent;
             }
         } else {
-            return getTreeOfFilteredFiles(files, root, postfix);
+            return getTreeOfFilteredFiles(files, root);
         }
 
     }
 
-    private Node getTreeOfFilteredFiles(List<File> files, File root, String postfix) {
-        Node node = new Node();
-        node.setFile(root);
-        return null;
+    private Node getTreeOfFilteredFiles(List<File> files, File root) {
+        Node node = new Node(root);
+        for (File file : files) {
+            node.insert(file);
+        }
+        return node;
     }
 }
