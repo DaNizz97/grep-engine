@@ -6,18 +6,12 @@ import com.danizz.textsearchengine.dto.SearchFileRequest;
 import com.danizz.textsearchengine.dto.SearchTextRequest;
 import com.danizz.textsearchengine.service.FileSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 public class FileController {
@@ -52,18 +46,4 @@ public class FileController {
         };
     }
 
-//    @GetMapping("/test")
-//    public StreamingResponseBody handleRequest() {
-//        return out -> {
-//            ReverseLineReader reader = new ReverseLineReader(new File("/home/da-nizz/IdeaProjects/textsearchengine/src/main/java/com/danizz/file.txt"));
-//            String line;
-//            int i = 0;
-//            while ((line = reader.readLine()) != null) {
-//                if (line.contains("v")) {
-//                    out.write((line + "\n").getBytes());
-//                    out.flush();
-//                }
-//            }
-//        };
-//    }
 }
