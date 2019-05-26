@@ -1,17 +1,15 @@
 <template>
-    <div>
-        <h1>{{ message }}</h1>
-    </div>
+    <files-view></files-view>
 </template>
 
 <script>
+    import FilesView from '../components/FilesView.vue';
+
     export default {
+        components: {
+            FilesView
+        },
         name: "App",
-        data() {
-            return {
-                message: 'Zdarova banditi'
-            }
-        }
     }
 </script>
 

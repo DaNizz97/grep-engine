@@ -1,10 +1,10 @@
 package com.danizz.textsearchengine.controller;
 
 import com.danizz.textsearchengine.ReverseLineReader;
-import com.danizz.textsearchengine.service.Node;
 import com.danizz.textsearchengine.dto.SearchFileRequest;
 import com.danizz.textsearchengine.dto.SearchTextRequest;
 import com.danizz.textsearchengine.service.FileSearchService;
+import com.danizz.textsearchengine.service.Node;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
