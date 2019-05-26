@@ -1,6 +1,5 @@
 package com.danizz.textsearchengine.service;
 
-import com.danizz.textsearchengine.dto.Node;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -38,7 +37,7 @@ public class FileSearchServiceImpl implements FileSearchService {
                 return new Node(file);
             } else {
                 Node parent = new Node(root);
-                parent.addChild(new Node(file));
+                parent.insert(file);
                 return parent;
             }
         } else {

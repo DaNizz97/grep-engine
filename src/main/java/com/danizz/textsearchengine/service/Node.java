@@ -1,4 +1,4 @@
-package com.danizz.textsearchengine.dto;
+package com.danizz.textsearchengine.service;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
@@ -12,12 +12,15 @@ import java.util.Objects;
 @Data
 @NoArgsConstructor
 public class Node {
+    @JsonIgnore
     private File file;
+    private String name;
     private List<Node> children;
     @JsonIgnore
     private Node parent;
 
     public Node(File file) {
+        this.name = file.getName();
         this.file = file;
         this.children = new LinkedList<>();
     }
@@ -54,7 +57,7 @@ public class Node {
             this.children.add(fileNode);
         } else {
             Node child = this.children.get(this.children.indexOf(fileNode));
-            child.insert(fileNode.getChildren().get(0).getFile());
+            child.insert(fileNode.getChildren().get(0));
         }
     }
 

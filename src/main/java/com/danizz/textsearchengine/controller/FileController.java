@@ -1,7 +1,7 @@
 package com.danizz.textsearchengine.controller;
 
 import com.danizz.textsearchengine.ReverseLineReader;
-import com.danizz.textsearchengine.dto.Node;
+import com.danizz.textsearchengine.service.Node;
 import com.danizz.textsearchengine.dto.SearchFileRequest;
 import com.danizz.textsearchengine.dto.SearchTextRequest;
 import com.danizz.textsearchengine.service.FileSearchService;
