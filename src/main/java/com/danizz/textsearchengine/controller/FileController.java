@@ -1,8 +1,8 @@
 package com.danizz.textsearchengine.controller;
 
-import com.danizz.textsearchengine.ReverseLineReader;
 import com.danizz.textsearchengine.dto.SearchFileRequest;
 import com.danizz.textsearchengine.dto.SearchTextRequest;
+import com.danizz.textsearchengine.exception.FileOrDirNotFoundException;
 import com.danizz.textsearchengine.service.FileSearchService;
 import com.danizz.textsearchengine.service.Node;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +26,9 @@ public class FileController {
     @PostMapping("/files")
     public Node getFiles(@RequestBody SearchFileRequest request) {
         final File file = new File(request.getPath());
+        if (!file.exists()) {
+            throw new FileOrDirNotFoundException("File " + request.getPath() + " not exists!");
+        }
         return searchService.getTreeOfFilteredFiles(file, request.getPostfix());
     }
 
