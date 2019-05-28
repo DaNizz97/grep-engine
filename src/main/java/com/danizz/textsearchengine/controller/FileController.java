@@ -6,6 +6,8 @@ import com.danizz.textsearchengine.exception.FileOrDirNotFoundException;
 import com.danizz.textsearchengine.service.FileSearchService;
 import com.danizz.textsearchengine.service.Node;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,20 +35,9 @@ public class FileController {
     }
 
     @PostMapping("/search")
-    public StreamingResponseBody findByFile(@RequestBody SearchTextRequest request) {
-        //TODO: Move method implementation into service
-        return out -> {
-            ReverseLineReader reader = new ReverseLineReader(new File(request.getFileName()));
-            String line;
-            int i = 0;
-            while ((line = reader.readLine()) != null && i < request.getMaxLinesCount()) {
-                if (line.contains(request.getPattern())) {
-                    out.write((line + "\n").getBytes());
-                    out.flush();
-                    i++;
-                }
-            }
-        };
+    public ResponseEntity<StreamingResponseBody> findByFile(@RequestBody SearchTextRequest request) {
+        StreamingResponseBody stream = searchService.getMatchesLinesAsStream(request);
+        return new ResponseEntity<>(stream, HttpStatus.OK);
     }
 
 }

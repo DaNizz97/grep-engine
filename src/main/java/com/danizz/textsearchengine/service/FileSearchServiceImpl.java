@@ -1,6 +1,9 @@
 package com.danizz.textsearchengine.service;
 
+import com.danizz.textsearchengine.dto.SearchTextRequest;
+import com.danizz.textsearchengine.util.ReverseLineReader;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -52,5 +55,21 @@ public class FileSearchServiceImpl implements FileSearchService {
             node.insert(file);
         }
         return node;
+    }
+
+    @Override
+    public StreamingResponseBody getMatchesLinesAsStream(SearchTextRequest request) {
+        return out -> {
+            ReverseLineReader reader = new ReverseLineReader(new File(request.getFileName()));
+            String line;
+            int i = 0;
+            while ((line = reader.readLine()) != null && i < request.getMaxLinesCount()) {
+                if (line.contains(request.getPattern())) {
+                    out.write((line + "\n").getBytes());
+                    out.flush();
+                    i++;
+                }
+            }
+        };
     }
 }

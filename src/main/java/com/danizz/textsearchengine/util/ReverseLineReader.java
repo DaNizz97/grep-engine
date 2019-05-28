@@ -1,4 +1,4 @@
-package com.danizz.textsearchengine;
+package com.danizz.textsearchengine.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
