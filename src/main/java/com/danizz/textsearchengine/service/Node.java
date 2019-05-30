@@ -1,6 +1,5 @@
 package com.danizz.textsearchengine.service;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,12 +11,9 @@ import java.util.Objects;
 @Data
 @NoArgsConstructor
 public class Node {
-    @JsonIgnore
     private File file;
     private String name;
     private List<Node> children;
-    @JsonIgnore
-    private Node parent;
 
     public Node(File file) {
         this.name = file.getName();
