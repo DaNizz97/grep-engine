@@ -40,4 +40,12 @@ public class FileController {
         return new ResponseEntity<>(stream, HttpStatus.OK);
     }
 
+    @PostMapping("/allFiles")
+    public Node getAllFiles(@RequestBody SearchFileRequest request) {
+        final File file = new File(request.getPath());
+        if (!file.exists()) {
+            throw new FileOrDirNotFoundException("File " + request.getPath() + " not exists!");
+        }
+        return searchService.getAllFilesTree(file);
+    }
 }

@@ -12,7 +12,7 @@
 	<artifactId>text-search-engine</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>text-search-engine</name>
-	<description>The firtst test task for SPLAT</description>
+	<description>The first test task for SPLAT</description>
 
 	<properties>
 		<java.version>1.8</java.version>

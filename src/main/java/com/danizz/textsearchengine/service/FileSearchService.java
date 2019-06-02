@@ -11,4 +11,6 @@ public interface FileSearchService {
 
     StreamingResponseBody getMatchesLinesAsStream(SearchTextRequest request);
 
+    Node getAllFilesTree(File file);
+
 }

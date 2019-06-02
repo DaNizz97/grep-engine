@@ -14,11 +14,17 @@ public class Node {
     private File file;
     private String name;
     private List<Node> children;
+    private boolean izFile;
 
     public Node(File file) {
+        this(file, false);
+    }
+
+    public Node (File file, boolean isFile) {
         this.name = file.getName();
         this.file = file;
         this.children = new LinkedList<>();
+        this.izFile = isFile;
     }
 
     public void addChild(Node child) {

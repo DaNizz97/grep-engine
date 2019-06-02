@@ -12,10 +12,6 @@ import java.util.List;
 @Service
 public class FileSearchServiceImpl implements FileSearchService {
 
-    private List<File> getAllFiles(String root) {
-        return getFilteredFiles(new ArrayList<>(), new File(root), "");
-    }
-
     private List<File> getFilteredFiles(List<File> files, File root, String postfix) {
         if (root.isFile() && root.getPath().endsWith(postfix)) {
             files.add(root);
@@ -72,4 +68,21 @@ public class FileSearchServiceImpl implements FileSearchService {
             }
         };
     }
+
+    @Override
+    public Node getAllFilesTree(File file) {
+        Node node = new Node(file);
+        if (file.isDirectory()) {
+            for (File f : file.listFiles()) {
+                if (f.isFile()) {
+                    node.addChild(new Node(f, true));
+                } else {
+                    node.addChild(getAllFilesTree(f));
+                }
+            }
+        }
+        return node;
+    }
+
+
 }
