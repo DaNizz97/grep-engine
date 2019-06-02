@@ -1,5 +1,6 @@
 package com.danizz.textsearchengine.controller;
 
+import com.danizz.textsearchengine.dto.CreateFileRequest;
 import com.danizz.textsearchengine.dto.SearchFileRequest;
 import com.danizz.textsearchengine.dto.SearchTextRequest;
 import com.danizz.textsearchengine.exception.FileOrDirNotFoundException;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import java.io.File;
+import java.io.IOException;
 
 @RestController
 public class FileController {
@@ -47,5 +49,15 @@ public class FileController {
             throw new FileOrDirNotFoundException("File " + request.getPath() + " not exists!");
         }
         return searchService.getAllFilesTree(file);
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<Boolean> createFile(@RequestBody CreateFileRequest request) throws IOException {
+        final File file = new File(request.getFilename());
+        if (request.getIsFile()) {
+            return new ResponseEntity<>(file.createNewFile(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(file.mkdir(), HttpStatus.OK);
+        }
     }
 }
