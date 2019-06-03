@@ -26,13 +26,22 @@ In project root run the following commands:
     java -jar text-search-engine-0.0.1-SNAPSHOT.jar
     
 ### Running the client of Grep application 
+Go to the client project https://github.com/DaNizz97/grep-engine-client
+
 In project root run the following commands: 
     
-    cd grep-engine-client/
     npm install
     npm run serve -- --port 8090
     
 After that go to http://localhost:8090
 
+### Running the client of File Browser application 
+Go to the client project https://github.com/DaNizz97/file-browser
 
+In project root run the following commands: 
+        
+    npm install
+    npm run serve -- --port 8091
     
+After that go to http://localhost:8090
+   
