@@ -4,10 +4,11 @@ import com.danizz.textsearchengine.dto.SearchTextRequest;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import java.io.File;
+import java.util.Optional;
 
 public interface FileSearchService {
 
-    Node getTreeOfFilteredFiles(File file, String postfix);
+    Optional<Node> getTreeOfFilteredFiles(File file, String postfix);
 
     StreamingResponseBody getMatchesLinesAsStream(SearchTextRequest request);
 

@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
@@ -18,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 
 @RestController
+@RequestMapping("/api")
 public class FileController {
 
     private FileSearchService searchService;
@@ -33,7 +35,9 @@ public class FileController {
         if (!file.exists()) {
             throw new FileOrDirNotFoundException("File " + request.getPath() + " not exists!");
         }
-        return searchService.getTreeOfFilteredFiles(file, request.getPostfix());
+        return searchService.getTreeOfFilteredFiles(file, request.getPostfix())
+                .orElseThrow(() ->
+                        new FileOrDirNotFoundException("No files with postfix " + request.getPostfix() + " were found!"));
     }
 
     @PostMapping("/search")

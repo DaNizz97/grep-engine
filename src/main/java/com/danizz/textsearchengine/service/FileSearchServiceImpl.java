@@ -8,6 +8,7 @@ import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBo
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FileSearchServiceImpl implements FileSearchService {
@@ -28,19 +29,22 @@ public class FileSearchServiceImpl implements FileSearchService {
     }
 
     @Override
-    public Node getTreeOfFilteredFiles(File root, String postfix) {
+    public Optional<Node> getTreeOfFilteredFiles(File root, String postfix) {
         List<File> files = getFilteredFiles(new ArrayList<>(), root, postfix);
+        System.out.println(files);
         if (files.size() == 1) {
             File file = files.get(0);
             if (file == root) {
-                return new Node(file);
+                return Optional.of(new Node(file));
             } else {
                 Node parent = new Node(root);
                 parent.insert(file);
-                return parent;
+                return Optional.of(parent);
             }
+        } else if (files.size() == 0) {
+            return Optional.empty();
         } else {
-            return getTreeOfFilteredFiles(files, root);
+            return Optional.of(getTreeOfFilteredFiles(files, root));
         }
 
     }
