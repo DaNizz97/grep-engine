@@ -31,7 +31,6 @@ public class FileSearchServiceImpl implements FileSearchService {
     @Override
     public Optional<Node> getTreeOfFilteredFiles(File root, String postfix) {
         List<File> files = getFilteredFiles(new ArrayList<>(), root, postfix);
-        System.out.println(files);
         if (files.size() == 1) {
             File file = files.get(0);
             if (file == root) {
